@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 const Input = ({
   type = "text",
   label,
+  name,
   value,
   onChange,
   placeholder,
@@ -21,6 +22,7 @@ const Input = ({
       )}
       <div className="mt-1 rounded-md shadow-sm">
         <input
+          name={name}
           type={type}
           required={required}
           value={value}

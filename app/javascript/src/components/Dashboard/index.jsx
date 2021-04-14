@@ -2,16 +2,43 @@ import React, { useState, useEffect } from "react";
 import { isNil, isEmpty, either } from "ramda";
 import Container from "components/Container";
 import ListPolls from "components/Polls/ListPolls";
+import Button from "components/Button";
+import pollsApi from "apis/polls";
+import Logger from "js-logger";
 const polls = [
   { title: "shloksoni" },
   { title: "amazn" },
   { title: "something" },
 ];
+
 const Dashboard = ({ history }) => {
+  const [polls, setPolls] = useState([]);
+  const fetchPolls = async () => {
+    try {
+      const response = await pollsApi.list();
+      setPolls(response.data);
+    } catch (error) {
+      logger.error(error);
+    }
+  };
+  const createPoll = () => {
+    history.push("/create");
+  };
+
+  useEffect(() => {
+    fetchPolls();
+  }, []);
+
   return (
     <Container>
       <div className="flex justify-between items-center mt-8 py-4 border-b">
         <h1 className="text-bb-purple text-4xl font-medium">POLLS</h1>
+        <Button
+          type="button"
+          buttonText="Create +"
+          loading={false}
+          onClick={createPoll}
+        />
       </div>
       {either(isNil, isEmpty)(polls) ? (
         <h1 className="text-xl leading-5 text-center">

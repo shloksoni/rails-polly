@@ -1,5 +1,15 @@
 import axios from "axios";
 
+axios.defaults.headers = {
+  Accept: "application/json",
+  "Content-Type": "application/json",
+};
+
+export const resetAuthTokens = () => {
+  delete axios.defaults.headers["X-Auth-Email"];
+  delete axios.defaults.headers["X-Auth-Token"];
+};
+
 export const setAuthHeaders = (setLoading = () => null) => {
   axios.defaults.headers = {
     Accept: "applicaion/json",
@@ -10,6 +20,7 @@ export const setAuthHeaders = (setLoading = () => null) => {
   };
   const token = localStorage.getItem("authToken");
   const email = localStorage.getItem("authEmail");
+
   if (token && email) {
     axios.defaults.headers["X-Auth-Email"] = email;
     axios.defaults.headers["X-Auth-Token"] = token;
