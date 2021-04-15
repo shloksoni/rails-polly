@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import Container from "components/Container";
 import { setAuthHeaders } from "../../apis/axios";
 import classnames from "classnames";
-import "./option.css";
 const ShowPoll = () => {
   const { id } = useParams();
   const [poll, setPoll] = useState({ title: "" });

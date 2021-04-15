@@ -5,6 +5,7 @@ import ListPolls from "components/Polls/ListPolls";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
 import Logger from "js-logger";
+
 const polls = [
   { title: "shloksoni" },
   { title: "amazn" },
@@ -12,6 +13,7 @@ const polls = [
 ];
 
 const Dashboard = ({ history }) => {
+  const [loading, setLoading] = useState(true);
   const [polls, setPolls] = useState([]);
   const fetchPolls = async () => {
     try {
@@ -19,6 +21,8 @@ const Dashboard = ({ history }) => {
       setPolls(response.data);
     } catch (error) {
       logger.error(error);
+    } finally {
+      setLoading(false);
     }
   };
   const createPoll = () => {

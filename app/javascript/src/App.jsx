@@ -12,7 +12,7 @@ import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import ShowPoll from "components/Polls/ShowPoll";
 import { ToastContainer } from "react-toastify";
 import CreatePoll from "components/Polls/CreatePoll";
-
+import PageLoader from "components/PageLoader";
 const data = [{ title: "Hello" }, { title: "Hello2" }];
 
 const App = () => {
@@ -26,6 +26,9 @@ const App = () => {
     setAuthHeaders(setLoading);
   }, []);
 
+  if (loading) {
+    return <PageLoader />;
+  }
   return (
     <Router>
       <ToastContainer />
