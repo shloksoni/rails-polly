@@ -61,3 +61,4 @@ gem 'rexml', '~> 3.2'
 
 gem "pundit"
 
+gem 'bundle-audit'
