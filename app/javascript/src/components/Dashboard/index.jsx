@@ -45,9 +45,7 @@ const Dashboard = ({ history }) => {
         />
       </div>
       {either(isNil, isEmpty)(polls) ? (
-        <h1 className="text-xl leading-5 text-center">
-          You have no tasks assigned 😔
-        </h1>
+        <h1 className="text-xl leading-5 text-center">NO POLLS 😔</h1>
       ) : (
         <ListPolls polls={polls} />
       )}
