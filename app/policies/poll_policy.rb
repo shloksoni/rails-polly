@@ -7,6 +7,6 @@ class PollPolicy
   end
 
   def show?
-    
+    true
   end
 end
