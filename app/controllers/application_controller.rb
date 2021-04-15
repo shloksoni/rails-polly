@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user_using_x_auth_token
     user_email = request.headers["X-Auth-Email"]
     auth_token = request.headers["X-Auth-Token"].presence
-    
-    puts "\n\n\n\\n\n\n\n\n\n"
-    puts user_email
-    puts "\n\n\n\\n\n\n\n\\n\n\n"
     user = user_email && User.find_by_email(user_email)
     
     if user && auth_token &&
@@ -22,7 +18,7 @@ class ApplicationController < ActionController::Base
       }
     end
   end
-
+  
   private
     def current_user
       @current_user

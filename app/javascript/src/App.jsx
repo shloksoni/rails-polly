@@ -8,8 +8,9 @@ import { getFromLocalStorage } from "helpers/storage";
 import PrivateRoute from "components/Common/PrivateRoute";
 import { either, isNil, isEmpty } from "ramda";
 import NavBar from "components/NavBar";
-import { setAuthHeaders } from "apis/axios";
+import { setAuthHeaders, registerIntercepts } from "apis/axios";
 import ShowPoll from "components/Polls/ShowPoll";
+import { ToastContainer } from "react-toastify";
 import CreatePoll from "components/Polls/CreatePoll";
 
 const data = [{ title: "Hello" }, { title: "Hello2" }];
@@ -21,11 +22,13 @@ const App = () => {
 
   useEffect(() => {
     initializeLogger();
+    registerIntercepts();
     setAuthHeaders(setLoading);
   }, []);
 
   return (
     <Router>
+      <ToastContainer />
       <NavBar isLoggedIn={isLoggedIn} />
       <Switch>
         <Route exact path="/signup" component={Signup} />

@@ -31,3 +31,5 @@
 
 en:
   successfully_created: "%{entity} was successfully created!"
+  response_recorded: "Response was successfully recorded!"
+  
