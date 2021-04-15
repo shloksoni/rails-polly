@@ -5,6 +5,7 @@ import ListPolls from "components/Polls/ListPolls";
 import Button from "components/Button";
 import pollsApi from "apis/polls";
 import Logger from "js-logger";
+import PageLoader from "../PageLoader";
 
 const polls = [
   { title: "shloksoni" },
@@ -33,6 +34,9 @@ const Dashboard = ({ history }) => {
     fetchPolls();
   }, []);
 
+  if (loading) {
+    return <PageLoader />;
+  }
   return (
     <Container>
       <div className="flex justify-between items-center mt-8 py-4 border-b">

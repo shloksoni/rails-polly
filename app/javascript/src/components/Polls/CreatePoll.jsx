@@ -28,10 +28,6 @@ const CreatePoll = ({ history }) => {
 
   useEffect(() => {}, []);
 
-  // if (pageLoading) {
-  //   return <PageLoader />;
-  // }
-
   return (
     <Container>
       <PollForm
