@@ -15,7 +15,6 @@ class User < ApplicationRecord
   before_save :to_lowercase
 
   private
-
     def to_lowercase
       email.downcase!
     end

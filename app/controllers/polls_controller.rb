@@ -1,7 +1,7 @@
 class PollsController < ApplicationController
- before_action :authenticate_user_using_x_auth_token, except: :index
- before_action :load_poll, only: :show
- before_action :load_options, :load_current_user_response, only: :show 
+  before_action :authenticate_user_using_x_auth_token, except: :index
+  before_action :load_poll, only: :show
+  before_action :load_options, :load_current_user_response, only: :show 
 
   def index
     polls = Poll.all
@@ -15,7 +15,7 @@ class PollsController < ApplicationController
         notice: t('successfully_created', entity: 'Poll')
       }
     else
-      # errors = poll.errors.full_messages
+      errors = poll.errors.full_messages
       render status: :unprocessable_entity, json: { errors: errors }
     end
   end
@@ -36,12 +36,11 @@ class PollsController < ApplicationController
     end
     render status: :ok, json:{
       user_response_option_id:  user_response_option_id , poll: @poll, options: response_options
-    }
-    
-    
+    }    
   end
 
   private
+  
     def load_params
       params.require(:poll).permit(:title, :option_attributes => [:id, :content])
     end
@@ -49,9 +48,13 @@ class PollsController < ApplicationController
     def load_current_user_response
       @current_user_response = Response.find_by(user: @current_user.id , poll: @poll.id)
     end
+
     def load_poll
       @poll = Poll.find(params[:id])
+      rescue ActiveRecord::RecordNotFound => e
+        render json: { errors: e }, status: :not_found
     end
+    
     def load_options
       @options = Option.where(polls: @poll.id)
     end
