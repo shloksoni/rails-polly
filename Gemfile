@@ -58,7 +58,7 @@ gem 'react-rails'
 
 gem 'bcrypt', '~> 3.1.13'
 
-gem 'rexml', '~> 3.2'
+gem 'rexml', '~> 3.2.5'
 
 gem "pundit"
 
